@@ -2,10 +2,10 @@ var express = require('express');
 var router = express.Router();
 
 var validator = require('validator');
-var Comment = require('../models/comments.js');
+var Event = require('../models/eventStuff.js');
 
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb://mongodb5058ma:ni6vep@danu7.it.nuigalway.ie:8717/mongodb5058';
+var mongoDB = 'mongodb://mongodb5171oa:qy3dag@danu7.it.nuigalway.ie:8717/mongodb5171';//input whatever DB you are using 
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true, });
 console.log("Connected to db");
 var Schema = mongoose.Schema;
@@ -26,7 +26,7 @@ function myEventFunction() {
     var mongoose = require('mongoose');
     var Schema = mongoose.Schema;
 
-
+    console.log("in the function");
     var TestSchema = new Schema({
             "username": String,
             "password": String,
@@ -40,15 +40,6 @@ function myEventFunction() {
 }
 
 
-var Test = mongoose.model("Test", TestSchema);
-var myobj = new Test({Event_name : "Software Engineering", month_id : "3", day_id : "day19"});
-
-var condition = { "username" : "Henry40" };
-var update = { $push:{ Event_name : "Software Engineering", month_id : "3", day_id : "day26"}};
-var options = { multi : true };
-var query = Test.find(condition);
-
-var doc = Test.updateOne(condition, update, options, callback);
 
 
 
@@ -90,33 +81,46 @@ function callback (err, numAffected) {
     if (err) return console.error(err);
 }
 
-console.log("Event has been added");
-
-
-
-
-
-
 /**
  * Adds comments to our database
  */
+var Test = mongoose.model("Test", TestSchema);
+var myobj = new Test({Event_name : "Software Engineering", month_id : "3", day_id : "day19"});
+
+var condition = { "username" : "Henry40" };
+var update = { $push:{ Event_name : "Software Engineering", month_id : "3", day_id : "day26"}};
+var options = { multi : true };
+var query = Test.find(condition);
+
+var doc = Test.updateOne(condition, update, options, callback);
 
 router.post('/addEvent', function(req, res, next) {
+    event = new Event(req.body);
+    event.save(function (err,savedEvent) {
+        if(err)
+            throw err;
+        res.json({
+            "id": savedEvent._id
+        });
 
+    });
     myEventFunction();
+
+
+    console.log("Event has been added");
 
 });
 
 /**
  Updates a comment already in the database
  */
-router.get('/getEvents', function(req, res, next)
+router.get('/getEvent', function(req, res, next)
 {
-    Event.find({}, function (err, events) {
+    Event.find({}, function (err, event) {
         if (err)
             res.send(err);
 
-        res.json(events);
+        res.json(event);
     });
 });
 
