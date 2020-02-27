@@ -46,7 +46,7 @@ function myEventFunction() {
 /* GET home page. */
 router.get('/', function(req, res, next) {
     console.log("hi there, i've been called");
-    res.render('CalenderDesign', { title: 'Express' });
+    res.render('index', { title: 'Express' });
 });
 
 router.get('/calendar', function(req, res, next) {
@@ -125,14 +125,14 @@ router.get('/getEvent', function(req, res, next)
 /**
  * Deletes a comment from the database
  */
-router.delete('/removeComment/:id', function(req, res, next){
+router.delete('/removeEvent/:id', function(req, res, next){
 
     var id = req.params.id;
-    Comment.deleteOne({_id:id}, function (err) {
+    Event.deleteOne({_id:id}, function (err) {
         if (err)
             res.send(err);
 
-        res.json({status : "Successfully removed the document"});
+        res.json({status : "Successfully removed the event"});
     });
 });
 
