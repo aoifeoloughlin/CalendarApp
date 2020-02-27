@@ -1,0 +1,1 @@
+<h2 class = "page-header">  {{user.name}} <span style="color: blue">(@{{user.username}})</span></h2>
