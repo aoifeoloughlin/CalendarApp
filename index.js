@@ -5,7 +5,7 @@ var validator = require('validator');
 var Event = require('../models/eventStuff.js');
 
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb://mongodb5171oa:qy3dag@danu7.it.nuigalway.ie:8717/mongodb5171';//input whatever DB you are using 
+var mongoDB = 'mongodb://mongodb5171oa:qy3dag@danu7.it.nuigalway.ie:8717/mongodb5171';//input whatever DB you are using
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true, });
 console.log("Connected to db");
 var Schema = mongoose.Schema;
@@ -46,7 +46,7 @@ function myEventFunction() {
 /* GET home page. */
 router.get('/', function(req, res, next) {
     console.log("hi there, i've been called");
-    res.render('index', { title: 'Express' });
+    res.render('CalenderDesign', { title: 'Express' });
 });
 
 router.get('/calendar', function(req, res, next) {
@@ -105,8 +105,6 @@ router.post('/addEvent', function(req, res, next) {
 
     });
     myEventFunction();
-
-
     console.log("Event has been added");
 
 });
@@ -116,11 +114,11 @@ router.post('/addEvent', function(req, res, next) {
  */
 router.get('/getEvent', function(req, res, next)
 {
-    Event.find({}, function (err, event) {
+    Event.find({}, function (err, eventStuff) {
         if (err)
             res.send(err);
 
-        res.json(event);
+        res.json(eventStuff);
     });
 });
 
