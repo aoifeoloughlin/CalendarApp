@@ -314,12 +314,6 @@ $(document).ready(function () {
                     }
 
 
-                    function getEvent() {
-                        $.ajax({
-                            url: 'http://danu7.it.nuigalway.ie:8642/getEvent',
-                            type: 'GET',
-                            success: function (data) {
-                                console.log(data);
 
 // Manipulate the DOM to place the data in the feedposts div
                                 $("#daysList").change(function () {//if the day options change then the area to print the message has to change as well
@@ -327,8 +321,6 @@ $(document).ready(function () {
                                     //if you want to add a new event to the day
                                     for (var i = 0; i < 31; i++) {
                                         var check = (i + 1) + "day";//loops through the day ids
-
-                                        console.log(check);
 
                                         var dayID = $('#daysList').children(":selected").attr("id");//if the day is selected in the options
                                         if (dayID == check) {//if they share the same id (and they should)
@@ -350,7 +342,7 @@ $(document).ready(function () {
 
                                             console.log(eventName);
                                             clearBox();//the input box is cleared
-                                     
+
 
 
                                         }
@@ -365,9 +357,18 @@ $(document).ready(function () {
                                 });
                             }
                         })
-                    }
+
+                })
+        function getEvent() {
+            $.ajax({
+                url: 'http://danu7.it.nuigalway.ie:8642/getEvent',
+                type: 'GET',
+                success: function (data) {
+                    console.log(data);
                 }
-                                //setInterval(getEvent, 10000);
+            })
+        }
+                                setInterval(getEvent, 10000);
 
                                 $("#newEvent").click(function (event) {
                                     var val = $('#months').val();
@@ -379,21 +380,11 @@ $(document).ready(function () {
                                         type: 'POST',
                                         data: {Event_name: eventName, month_id: val, day_id: dayID},
                                         success: function (data) {
-                                           // getEvent();
+                                            getEvent();
                                         }
                                     });
                                 });
 
-                /**Don't mind the comments below i was working on fixing the brackets**/
                                 //adds the event to the day! month doesn't make a difference yet
-
-
-                            //line 155
-                        //line 322
-
-
-
-                })//line 262
-            })//line 8
-        })//line 7
-    });
+                         })
+            });
