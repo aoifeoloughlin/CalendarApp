@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script type="text/javascript" src='/javascripts/friendsP.js'></script>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" ></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" ></script>
+
+    <style>
+        table, th, td {
+            border: 2px solid dimgrey;
+        }
+    </style>
+    <style>
+        body {
+            width: 100%;
+            padding: 0 0 0 0;
+            background: #213b52;
+            background: linear-gradient(180deg, #213b52 0%, #213c54 35%, #204564 100%);
+        }
+        .friends .card {
+
+            margin-left: 0px;
+            margin-right: 0px;
+            margin-top: 50px; /* changed */
+            border: 0;
+            padding: 10px 30px;
+            margin-bottom: 60px;
+            position: static;
+            background: transparent;
+            left: 800px;
+            bottom: 440px;
+
+        }
+
+        .friends .card-img img {
+            max-width: 100%;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .friends .card-body {
+            z-index: 10;
+            background: #fff;
+            border-top: 8px solid #fff;
+            padding: 40px;
+            box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+            margin-top: -60px;
+            transition: 0.3s;
+        }
+
+        .friends .card-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .friends .card-title a {
+            color: #213b52;
+            transition: 0.3s;
+        }
+
+        .friends .read-more a {
+            color: #777777;
+            text-transform: uppercase;
+            font-weight: 600;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+
+        .friends .read-more a:hover {
+            color: #fdc134;
+        }
+
+        .friends .card:hover img {
+            transform: scale(1.1);
+        }
+
+        .friends .card:hover .card-body {
+            border-color: #fdc134;
+        }
+
+        .friends .card:hover .card-body .card-title a {
+            color: #fdc134;
+        }
+
+
+        .myself .card {
+
+            margin-left: 0px;
+            margin-right: 0px;
+            margin-top: 50px; /* changed */
+            border: 0;
+            padding: 10px 30px;
+            margin-bottom: 60px;
+            position: relative;
+            background: transparent;
+            left: 100px;
+
+        }
+
+        .myself .card-img img {
+            max-width: 100%;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .myself .card-body {
+            z-index: 10;
+            background: #fff;
+            border-top: 8px solid #fff;
+            padding: 40px;
+            box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+            margin-top: -60px;
+            transition: 0.3s;
+        }
+
+        .myself .card-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .myself .card-title a {
+            color: #213b52;
+            transition: 0.3s;
+        }
+
+        .myself .read-more a {
+            color: #777777;
+            text-transform: uppercase;
+            font-weight: 600;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+
+        .myself .read-more a:hover {
+            color: #fdc134;
+        }
+
+        .myself .card:hover img {
+            transform: scale(1.1);
+        }
+
+        .myself .card:hover .card-body {
+            border-color: #fdc134;
+        }
+
+        .myself .card:hover .card-body .card-title a {
+            color: #fdc134;
+        }
+    </style>
+</head>
+<body>
+
+<div class="row">
+
+    <div class="col-md-8">
+        <div class = "myself" id = "myself">
+            <div class = "col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="fade-right">
+                <div class="card" style="width: 40rem;">
+                    <img src="//live.staticflickr.com/65535/49639139056_52148eb16c_h.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">My UserName</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="friends" id="addRemoveFriends">
+
+
+            <div class="col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="fade-left">
+                <div class="card" style="width: 40rem;"><img
+                        src="//live.staticflickr.com/8581/28087159512_2bec0c4fd4_k.jpg" class="card-img-top"
+                        alt="...">
+                    <div class="card-body"><h5 class="card-title" id="otherUserName0">James</h5>
+
+                        <div class="button btn btn-primary" onclick = "addF()" id="addFriendButton0">Add Friend</div>
+
+
+                        <div href="#" class="buttonR btn btn-danger" onclick = "rfriend()" id="removeFriendButton0">Remove Friend</div></div>
+                </div>
+            </div>
+            <div class="col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="fade-left">
+                <div class="card" style="width: 40rem;"><img
+                        src="//live.staticflickr.com/8581/28087159512_2bec0c4fd4_k.jpg" class="card-img-top"
+                        alt="...">
+                    <div class="card-body"><h5 class="card-title" id="otherUserName2">WINNIE</h5>
+                        <div class="button btn btn-primary" onclick = "addF()" id="addFriendButton2">Add Friend</div>
+                        <a href="#" class="buttonR btn btn-danger" onclick = "rfriend()" id="removeFriendButton2">Remove Friend</a></div>
+                </div>
+            </div>
+            <div class="col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="fade-left">
+                <div class="card" style="width: 40rem;"><img
+                        src="//live.staticflickr.com/8581/28087159512_2bec0c4fd4_k.jpg" class="card-img-top"
+                        alt="...">
+                    <div class="card-body"><h5 class="card-title" id="otherUserName3">Olly</h5>
+                        <div class="button btn btn-primary" onclick = "addF()" id="addFriendButton3">Add Friend</div>
+                        <a href="#" class="buttonR btn btn-danger" onclick = "rfriend()" id="removeFriendButton3">Remove Friend</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+</div>
+</div>
+</div>
+
+
+</div>
+
+</div>
+<script src='/javascripts/friendsP.js'></script>
+</body>
+</html>
+
+
