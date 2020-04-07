@@ -102,7 +102,9 @@ router.post('/signup', function(req, res, next){
 });
 
 
-
+router.post('/timeTable', function(req,res,next){
+       res.render(timeTable);
+});
 
 
 function callback (err, numAffected) {
