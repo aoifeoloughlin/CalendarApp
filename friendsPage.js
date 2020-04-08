@@ -1,4 +1,4 @@
-var myUserId = "5e68cbb29c926f49b53ecad6";
+var myUserId = "5e8dd9b45c7825662bc811dd";
 var checkUsername = "";
 var newFriend = "";
 var nameOfFriend = "";
@@ -7,19 +7,14 @@ var checkButton = "";
 var clicked = '';
 
 $(document).ready(function () {
-
     window.onload = getFriends();
-
 
     function getFriends() {
 
         $.ajax({
-
-
             url: 'http://danu7.it.nuigalway.ie:8642/getFriends',
             type: 'GET',
             success: function (data) {
-
 
                 for (var i = 0; i < data.length; i++) {
                     friends[i] = data[i].username;
@@ -32,50 +27,35 @@ $(document).ready(function () {
                                 "<div class='card' style='width: 40rem;'> <img src='//live.staticflickr.com/8581/28087159512_2bec0c4fd4_k.jpg' class='card-img-top' alt='...'>" +
                                 "<div class='card-body'> <h5 class='card-title' id = 'otherUserName";
                             friendCardArea += i;
-                            friendCardArea += "'></h5> <div class='btn btn-primary' id = '";
+                            friendCardArea += "'></h5> <a class='btn btn-primary' role = 'button' id = '";
                             friendCardArea += addFriendBut;
                             friendCardArea += "'";
-                            friendCardArea += ">Add Friend</div> <a href='#' class='btn btn-danger' id = 'removeFriendButton";
+                            friendCardArea += ">Add Friend</a> <a role = 'button' class='buttonR btn btn-danger' id = 'removeFriendButton";
                             friendCardArea += i;
                             friendCardArea += "'>Remove Friend</a>" +
                                 "</div>" +
                                 "</div>" +
                                 "</div>";
-
-
-
-
                         }
-                        // $(fUsername).append(data[i].username);
                     }
-
                 }
-
-
-
-
-
-
-
             }
         })
-
-
     }
 
-    
-    $('.buttonR btn btn-danger').click(function(){
+
+    $('.buttonR').on('click',function(){
         var removeClick = $(this).attr('id');
         console.log(removeClick);
         for (var l = 0; l < friends.length; l++) {
             var checkButtonR = "removeFriendButton" + l;
             var checkUs = "#otherUserName"+l;
-var holdL = 0;
+            var holdL = 0;
             if (removeClick == checkButtonR) {
                 console.log(checkButtonR);
 
                 console.log(holdL);
-                     holdL = l;
+                holdL = l;
 
             }
         }
@@ -83,9 +63,7 @@ var holdL = 0;
         removeFriends(checkUsernameR);
     })
 
-
-
-    $('.button').click(function() {
+    $('.button').on('click', function() {
         var clicked = $(this).attr('id');
         console.log(clicked);
 
@@ -107,10 +85,10 @@ var holdL = 0;
         $.ajax({
             url: 'http://danu7.it.nuigalway.ie:8642/putFriends',
             type: 'PUT',
-            data: {"_id" :  myUserId, 'Friends_username': checkUsername, 'username': "Remus" },
+            data: {"_id" :  myUserId, 'Friends_username': checkUsername, 'username': "Olly" },
             success: function (data) {
                 console.log(data);
-
+                window.alert("Friend: "+checkUsername+" added!");
             }
         });
     }
@@ -119,16 +97,12 @@ var holdL = 0;
     function removeFriends(checkUsernameR){
         $.ajax({
             url: 'http://danu7.it.nuigalway.ie:8642/deleteFriends',
-            type: 'DELETE',
-            data: { "_id" :  myUserId ,'Friends_username': checkUsernameR, 'username': "Remus"},
+            type: 'PUT',
+            data: { "_id" :  myUserId ,'Friends_username': checkUsernameR, 'username': "Olly"},
             success: function (data) {
+                window.alert("Friend: "+checkUsernameR+" removed!");
             }
         });
     }
 
-
 });
-
-
-
-
