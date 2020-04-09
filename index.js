@@ -91,6 +91,11 @@ function callback (err, numAffected) {
 var Test = mongoose.model("Test", TestSchema);
 var FriendTest = mongoose.model("FriendTest", FriendSchema);
 var doc = Test.updateOne(condition, update, options, callback);
+var myobj = new Test({Event_name : "Software Engineering", month_id : "3", day_id : "day19"});
+var condition = { "username" : "Henry40" };
+var update = { $push:{ myobj}};
+var options = { multi : true };
+var query = Test.find(condition);
 
 router.post('/addEvent', function(req, res, next) {
     event = new Event(req.body);
@@ -169,11 +174,7 @@ router.get('/findDelEvent', function(req, res, next){
         })
 });
 
-var myobj = new Test({Event_name : "Software Engineering", month_id : "3", day_id : "day19"});
-var condition = { "username" : "Henry40" };
-var update = { $push:{ myobj}};
-var options = { multi : true };
-var query = Test.find(condition);
+
 
 router.get('/getEvent', function(req, res, next) {
     Event.find({}, function (err, eventStuff) {
