@@ -27,3 +27,18 @@ The Friends Page:
   
   
   By pressing the add friend button, the friend should get added to the user's friends array in the database. If it went according to the Initial goal, since each username is  unique, it will allow the database to easily find the friends' document and information. Alas, due to some bugs, explained more throughly in the final report, the information gets passed from the web page to the server but doesn't make it to the database. Similarly, the remove friends button suffers from the same bug. The remove friends button, takes the username of the "friend" finds them in the friends array and deletes them from it, but due to the bug it finds the friend and trys to get to the database to delete them but doesn't. All bugs will be explained in detail in the final report for this project. 
+
+
+The Weekly Timetable:
+
+This part of the project let users input their timetable, which they could use to compare to other users when planning events. For this two versions were created a function to create a timetable with javascript, one modifiable table and one unmodifiable for the comparisons. 
+
+The modifiable table is on its own page. It takes data stored in the database, initially set to always available, and generates a table using a loop. It uses the bootstrap warning colour to represent busy and none to represent available. Event handlers are then applied to each cell, so that when the user clicks on a cell it changes the colour of the cell and updates the position in the array corresponding to that cell. There is a save button which when clicked sends the updated table data to the database.
+
+The comparative table gets the timetable data of the user and each friend they have added to an event and logical OR’s each cells position. Then the table is drawn with the same colouring as the editable table. This will let the user know what times if any that everyone added to the event is free. 
+
+The timetable assumes people have a set weekly schedule and stores only one week between the hours of 9:00 and 20:00. It is stored as an array of 1’s or 0’s (initially 0’s).
+
+The Database:
+When first deciding on how to go about designing the web application, it was decided that MongoDB would be used to store information on the users. Mongoose was used to model the data structure and manage the data. 
+
