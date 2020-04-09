@@ -62,8 +62,6 @@ $(document).ready(function () {
                 dayNumber += "'></div>\n" +
                     "      <div class=\"modal-footer\">\n" +
                     "        <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n" +
-                    "        <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\">Save changes</button>\n" +
-                    "  <button class=\"btn btn-danger\" id = 'removeButton' > Remove Event</button>"+
                     "      </div>\n" +
                     "    </div>\n" +
                     "  </div>\n" +
@@ -103,7 +101,6 @@ $(document).ready(function () {
             $trs.remove();
             $('#monthAndYear').empty();
         }
-
 
 // Generates table row used when rendering Calendar
         function makeCalendarRow() {
@@ -185,8 +182,6 @@ $(document).ready(function () {
                             }
                         }
                     }
-
-
                 }
             })
         }
@@ -199,19 +194,16 @@ $(document).ready(function () {
 
         }
 
-
         $(document).ready(function () {
             // Bind Events
             $('#previous').click(function () {
-
                 navigationHandler(-1);
             });
-            $('#next').click(function () {
 
+            $('#next').click(function () {
                 navigationHandler(1);
             });
             // Generate Calendar
-
             theCalendar();
 
             //this is the selector will all the year options it will be used to check whether or not feb is a leap year
@@ -220,37 +212,24 @@ $(document).ready(function () {
                 years += '<option id = \"';
                 years += ddmmyy.getUTCFullYear() + y;
                 years += '\"';
-
                 years += ' value=\"';
                 years += ddmmyy.getUTCFullYear() + y;
                 years += "\">";
-
                 years += ddmmyy.getUTCFullYear() + y;
                 years += "</option>\n";
-
-
             }
 
-            //this needs to be integrated to the function which adds event to the calendar so that
-            //you can pick the month and save the events and print them when the month is called by for that to work the
-            //year list, month list and daylist all have to be able to influence each other -- i don't know how to do that yet
-            //then when the add event button is pressed the details will be saved and then when the months are changed the database is
-            //checked for any event information
             var months = "";
             for (var l = 0; l < monthName.length; l++) {
                 months += '<option id = \"';
                 months += l;
                 months += '\"';
-
                 months += ' value=\"';
                 months += l;
                 months += "\">";
-
                 months += monthName[l];
                 months += "</option>\n";
             }
-
-
 
             var addThing = "<div id = \"eventDetails\" data-role=\"popup\" data-theme=\"a\" class=\"ui-corner-all\">\n" +
 
@@ -299,7 +278,6 @@ $(document).ready(function () {
 
             addThing += "\n";
 
-
             var count = 0;
 
             $('#eventButton').append(addThing);
@@ -346,8 +324,6 @@ $(document).ready(function () {
 
             removeThing += "\n";
             $('#removeTheEvent').append(removeThing);
-
-
 
             $(document).ready(function () {
 
@@ -402,16 +378,11 @@ $(document).ready(function () {
                                 days += k + 1;
                                 days += "\">";
                                 days += k + 1;
-                                /** If the day button gets clicked the id of the selected is gotten
-                                 * then print the eventName  = getDocumentbyID from the input box and $(selectedday).append(event name);**/
                                 days += "</option>\n";
 
                             }
-
                             $("#daysList").html(days);//adds the day options to the html
-
                         }
-
                     }
 
                     for (var a = 0; a < monthName.length; a++) {
@@ -428,68 +399,31 @@ $(document).ready(function () {
                                 daysR += k + 1;
                                 daysR += "\">";
                                 daysR += k + 1;
-                                /** If the day button gets clicked the id of the selected is gotten
-                                 * then print the eventName  = getDocumentbyID from the input box and $(selectedday).append(event name);**/
                                 daysR += "</option>\n";
 
                             }
-
-
                             $("#daysListRemove").html(daysR);
                         }
 
                     }
 
                     $("#daysListRemove").change(function () {//if the day options change then the area to print the message has to change as well
-
-                        //if you want to add a new event to the day
-
                         var eventCell = "";
                         eventCell += eventCell + " " + eventName;
-
-                        //  eventArray[1] = eventCell;
-
-
-                        // console.log(eventName);
-                        //clearBox();//the input box is cleared
-
-
-
-
 
                         function clearBox() {//Function only clears the input box
                             $('#removeName').val('');
                         }
-
-
-
-
                     });
 
-// Manipulate the DOM to place the data in the feedposts div
-                    $("#daysList").change(function () {//if the day options change then the area to print the message has to change as well
-
-                        //if you want to add a new event to the day
+                    $("#daysList").change(function () {
 
                         var eventCell = "";
                         eventCell += eventCell + " " + eventName;
 
-                        //  eventArray[1] = eventCell;
-
-
-                        // console.log(eventName);
-                        //clearBox();//the input box is cleared
-
-
-
-
-
                         function clearBox() {//Function only clears the input box
                             $('#eventName').val('');
                         }
-
-
-
 
                     });
                 }
@@ -504,49 +438,39 @@ $(document).ready(function () {
                             type: 'POST',
                             data: {"Event_name": eventName, "day_id":day_id, "month_id":mon},
                             success: function (data) {
-                                window.onload = getEvent();
+                               reload();
                             }
                         })
                     })
 
                 function getEvent() {
-
                     $.ajax({
                         url: 'http://danu7.it.nuigalway.ie:8642/getEvent',
                         type: 'GET',
                         success: function (data) {
                             var newData ="";
                             var monthCheck = ddmmyy.getUTCMonth();
-
                             for(var i = 0; i<data.length; i++){
                                 if(data[i].month_id == monthCheck ) {
 
                                     for (var k = 0; k < 31; k++) {
                                         var check = (k + 1) + "day";//loops through the day ids
-                                        newData = data[i].Event_name;
+                                        newData="<p>"+ data[i].Event_name+"</p>";
                                         var popUpBox = '#postArea'+(k+1);
                                         if (data[i].day_id == check) {//if they share the same id (and they should)
                                             var post = '#inputPost' + (k+1);//then the inputPost(the area where it will be printed) is found accordingly
 
-
-
-
-
-                                            $(post).append(newData);//the event is added to the area
+                                            $(post).append(newData);//the event is added to the day area
                                             $(post).append("\n");
-                                            $(popUpBox).append(newData);//the event is added to the area
+                                            $(popUpBox).append(newData);//the event is added to the popup
                                             $(popUpBox).append("\n");
-
                                         }
                                     }
                                 }
                             }
-
-
                         }
                     })
                 }
-
 
                 $("#remEvent").click(function (event) {
                     var dropdown = "";
@@ -558,7 +482,7 @@ $(document).ready(function () {
                         url: 'http://danu7.it.nuigalway.ie:8642/findDelEvent',
                         type: 'GET',
                         success: function (data) {
-                            //  console.log(eventName);
+
                             console.log(dayID);
                             console.log(val);
                             dropdown+= "<select id = \"RemoveDD\" > <div class=\"dropdown\">\n" +
@@ -568,7 +492,6 @@ $(document).ready(function () {
                                 "  <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n";
                             for(var i=0;i<data.length; i++) {
                                 if (dayID == data[i].day_id && val == data[i].month_id){
-
                                     dropdown+=   "<option class=\"dropdown-item\" value = \"";
                                     dropdown+=  data[i]._id;
                                     dropdown+="\" id = \"";
@@ -576,17 +499,14 @@ $(document).ready(function () {
                                     dropdown +="\" >";
                                     dropdown+= data[i].Event_name;
                                     dropdown+= "</option>\n";
-
                                 }
                             }
-
                             dropdown+=   "  </div>\n" +
                                 "</div></select>";
                             $(".modal-body").append(dropdown);
                         }
                     });
                 });
-
 
                 $("#getRidOfEvent").click(function (event) {
 
@@ -597,16 +517,12 @@ $(document).ready(function () {
                         data: {_id: removingId},
                         success: function (data) {
                             console.log(removingId);
+
                             window.onload = getEvent();
                         }
                     });
-
-
                 })
             })
-
         })
-
-
     })
 });
