@@ -12,12 +12,75 @@
     <script src='/javascripts/cal2.js'></script>
     <style>
         table, th, td {
-            border: 2px solid dimgrey;
+            border: 2px solid #213b52;
+
         }
     </style>
     <style>
         body {
-            background: linear-gradient(#a1b7ff 35%, #ffffff );
+            width: 100%;
+            padding: 0 0 0 0;
+            background: #213b52;
+            background: linear-gradient(180deg, #213b52 0%, #213c54 35%, #204564 100%);
+        }
+        .todoArea{
+            background:#848484;
+            color: #fdc134;
+            min-height: 100px;
+            width: 175px;
+            margin: 0 auto;
+        }
+        .nextButton{
+            margin: auto;
+            border: 2px;
+            padding: 1px 60px;
+            transition: 0.4s;
+            border-radius: 12px;
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+
+            background: #fdc134;
+            color: #213b52;
+
+
+        }
+        .previousButton{
+            margin: auto;
+            border: 2px;
+            padding: 1px 60px;
+            transition: 0.4s;
+            border-radius: 12px;
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+
+            background: #fdc134;
+            color: #213b52;
+
+
+        }
+        .col-xl{
+            background: #848484;
+        }
+        .monthAndYear{
+            background: #fff;
+        }
+        .dayNum{
+            text-align: center;
+            margin: auto;
+            background: #fdc134;
+            border: 2px;
+            padding: 1px 80px;
+            color: #fff;
+            transition: 0.4s;
+            border-radius: 12px;
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+            align-items: center;
+        }
+        .dayNames{
+            text-align: center;
+            margin: auto;
+            background: #dde8f1;
+        }
+        ul.a {
+            list-style-type: circle;
         }
     </style>
 </head>
@@ -26,9 +89,7 @@
 
 <table style="width:75%" align = "center" id = 'calender'>
 
-    <col align="left">
-    <col align="left">
-    <col align="right">
+
     <div class="container" >
 
         <div class="calender_header">
@@ -37,11 +98,11 @@
             <div class="col-xl" align="center" style="background: #c0e3ff; font-family: 'Arial Narrow'; font-size: xxx-large">
 
 
-                <div  id = "monthAndYear"> </div>
+                <div class = "monthAndYear" id = "monthAndYear"> </div>
 
 <thead>
 
-                <tr style="font-family: 'Arial Narrow'; font-size: medium">
+                <tr style="font-family: 'Arial Narrow'; font-size: medium" class = "dayNames">
 
                     <th>SUNDAY</th>
                     <th>MONDAY</th>
@@ -66,10 +127,17 @@
     </div>
 </table>
 
-<p><button class="btn btn-secondary" id = 'previous' > Previous</button>
-    <button class="btn btn-secondary"  id = 'next' > Next</button></p>
+<p><button class="previousButton" id = 'previous' > Previous</button>
+    <button class="nextButton"  id = 'next' > Next</button>
+
+</p>
+
 
 <div id = 'eventButton'>
+
+</div>
+<div
+    id = 'removeTheEvent'>
 
 </div>
 
